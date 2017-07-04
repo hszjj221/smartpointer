@@ -13,6 +13,18 @@ public:
 			delete pointer_;
 		}
 	}
+
+	SmartPointer(const SmartPointer& sp) {
+		pointer_ = sp.pointer_;
+	}
+	SmartPointer& operator = (const SmartPointer& sp) {
+		if (this == &sp)
+			return *pointer_;
+		if (pointer_)
+			delete pointer_;
+		pointer_ = sp.pointer_;
+		return *this;
+	}
 };
 
 #endif // !_SMARTPOINTER_H_
