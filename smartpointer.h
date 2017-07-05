@@ -7,7 +7,7 @@ private:
 	T *pointer_;
 	int ref_count_;
 public:
-	BasePointer(T *p) : pointer_(p), ref_count_(1) {}
+	BasePointer(T *p) : pointer_(p), ref_count_(0) {}
 	void IncCount() {
 		++ref_count_;
 	}
@@ -33,7 +33,8 @@ public:
 			pointer_->IncCount();
 	}
 	~SmartPointer() {
-		if (pointer_) {
+		pointer_->DecCount();
+		if (pointer_->GetCount() == 0) {
 			delete pointer_;
 		}
 	}
