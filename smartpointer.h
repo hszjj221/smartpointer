@@ -53,6 +53,26 @@ public:
 		pointer_ = sp.pointer_;
 		return *this;
 	}
+
+	T* operator -> () const {
+		return pointer_->pointer_;
+	}
+	T& operator * () const {
+		return *pointer_->pointer_;
+	}
+
+	bool operator == (const T* t) const {
+		return pointer_->pointer_ == t;
+	}
+	bool operator == (const SmartPointer& sp) const {
+		return pointer_->pointer_ == sp.pointer_->pointer_;
+	}
+	bool operator != (const T* t) const {
+		return pointer_->pointer_ != t;
+	}
+	bool operator != (const SmartPointer& sp) const {
+		return pointer_->pointer_ != sp.pointer_->pointer_;
+	}
 };
 
 #endif // !_SMARTPOINTER_H_
